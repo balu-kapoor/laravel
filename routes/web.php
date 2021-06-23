@@ -19,7 +19,9 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::post('/', [HomeController::class, 'subscribe'])->name('subscribe');
 
+Route::post('login', [HomeController::class, 'login'])->name('login');
+
 Route::get('login', function(Request $request) {
     $email = $request->input('email');
     return view('login', compact('email'));
-})->name('login');
+});
