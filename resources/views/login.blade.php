@@ -136,22 +136,20 @@
         }
        
 
-        $.getJSON("http://jsonip.com?callback=?", function (data) {
+        $.getJSON('https://json.geoiplookup.io/?callback=?', function (data) {
+            console.log(data);
             // $(".ip").text(data.ip);\
-            var settings = {
-            "url": `https://api.ipgeolocation.io/ipgeo?apiKey=a5b0180d74874ac5af4f7baaf3065e36&ip=${data.ip}`,
-            "method": "GET",
-            "timeout": 0,
-            };
-
-            $.ajax(settings).done(function (response) {
+            // var settings = {
+            // "url": `https://api.ipgeolocation.io/ipgeo?apiKey=a5b0180d74874ac5af4f7baaf3065e36&ip=${data.ip}?callback=?`,
+            // "method": "GET",
+            // "timeout": 0,
+        
                 let city = document.querySelector('#city');
                 let st = document.querySelector('#state');
                 let ct = document.querySelector('#country');
-                city.value = response.city;
-                st.value = response.state_prov;
-                ct.value = response.country_name;
-            });
+                city.value = data.city;
+                st.value = data.region;
+                ct.value = data.country_name;
         });
         
     </script>
